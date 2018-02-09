@@ -39,7 +39,15 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 
-		clients.jdbc(dataSource);
+//		clients.jdbc(dataSource);
+        clients.inMemory()
+                .withClient("shopistanClientApp")
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit","client_credentials")
+                .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
+                .scopes("read", "write", "trust")
+                .secret("libiamoCalici")
+                .accessTokenValiditySeconds(43200).//invalid after 5 minutes.
+                refreshTokenValiditySeconds(1200);//refresh after 10 minutes.*/
       	}
 
 	@Override
