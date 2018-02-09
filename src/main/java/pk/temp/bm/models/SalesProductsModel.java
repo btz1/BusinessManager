@@ -7,38 +7,34 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Created by Tanzeel on 10/2/2018.
+ */
+
 @Entity
 @Table(name="sales_products")
 //@NamedQuery(name="SalesProducts.findAll", query="SELECT s FROM SalesProducts s")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
-public class SalesProducts implements Serializable{
+public class SalesProductsModel implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(unique=true, nullable=false)
-    private Integer id;
+    private Long id;
 
     @Column(nullable=false, length=100)
     private String quantity;
 
     @ManyToMany
     @JoinColumn(name="id")
-    private List<Sales> salesList;
+    private List<SalesModel> salesList;
 
     /*@ManyToMany
     @JoinColumn(name="product_id")
     private Customer productId;*/
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getQuantity() {
         return quantity;
@@ -48,11 +44,19 @@ public class SalesProducts implements Serializable{
         this.quantity = quantity;
     }
 
-    public List<Sales> getSalesList() {
+    public List<SalesModel> getSalesList() {
         return salesList;
     }
 
-    public void setSalesList(List<Sales> salesList) {
+    public void setSalesList(List<SalesModel> salesList) {
         this.salesList = salesList;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

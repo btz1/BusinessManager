@@ -13,7 +13,7 @@ import java.util.List;
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
-public class Customer implements Serializable {
+public class CustomerModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -41,7 +41,7 @@ public class Customer implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "id")
-    private List<Sales> salesList;
+    private List<SalesModel> salesList;
 
     public Integer getId() {
         return id;
