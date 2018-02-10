@@ -39,7 +39,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 			.antMatchers(HttpMethod.DELETE, "**").denyAll()
 			.antMatchers(HttpMethod.PUT, "**").denyAll()
 			.antMatchers(HttpMethod.PATCH, "**").denyAll()
-			.antMatchers("/**").authenticated()
+			.antMatchers("/**").permitAll()
 		.and()
 			.exceptionHandling()
 			.accessDeniedHandler(new OAuth2AccessDeniedHandler())

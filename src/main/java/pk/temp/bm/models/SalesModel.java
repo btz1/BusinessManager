@@ -3,6 +3,7 @@ package pk.temp.bm.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -37,13 +38,17 @@ public class SalesModel implements Serializable{
     @Column(name="advance_payment", nullable=false, length=100)
     private String advancePayment;
 
-    @OneToMany()
-    @JoinColumn(name="id")
-    private List<CustomerModel> customerId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private CustomerModel customer;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="id")
-    private List<SalesProductsModel> saleProductId;
+    @JsonIgnore
+    private List<SalesProductsModel> saleProductList;
+
+    @Transient
+    private String customerName;
 
 
 
@@ -87,19 +92,27 @@ public class SalesModel implements Serializable{
         this.advancePayment = advancePayment;
     }
 
-    public List<CustomerModel> getCustomerId() {
-        return customerId;
+    public CustomerModel getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(List<CustomerModel> customerId) {
-        this.customerId = customerId;
+    public void setCustomer(CustomerModel customer) {
+        this.customer = customer;
     }
 
-    public List<SalesProductsModel> getSaleProductId() {
-        return saleProductId;
+    public List<SalesProductsModel> getSaleProductList() {
+        return saleProductList;
     }
 
-    public void setSaleProductId(List<SalesProductsModel> saleProductId) {
-        this.saleProductId = saleProductId;
+    public void setSaleProductList(List<SalesProductsModel> saleProductList) {
+        this.saleProductList = saleProductList;
+    }
+
+    public String getCustomerName() {
+        return customer.getFirstName();
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 }

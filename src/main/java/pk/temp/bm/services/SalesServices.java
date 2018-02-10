@@ -2,7 +2,6 @@ package pk.temp.bm.services;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pk.temp.bm.models.CustomerModel;
@@ -33,19 +32,17 @@ public class SalesServices {
             sales = objectMapper.readValue(jsonObject,SalesModel.class);
             if (sales != null){
 
-                List<CustomerModel> customerModelList = new ArrayList<>();
                 CustomerModel customerModel = new CustomerModel();
-                System.out.println(sales.getCustomerId().get(0));
-                customerModel = customerRepository.save(sales.getCustomerId().get(0));
-                customerModelList.add(customerModel);
-                sales.setCustomerId(customerModelList);
+                System.out.println(sales.getCustomer());
+                customerModel = customerRepository.save(sales.getCustomer());
+                sales.setCustomer(customerModel);
 
-                if (sales.getSaleProductId() != null){
+                if (sales.getSaleProductList() != null){
                     List<SalesProductsModel> salesProductsList = new ArrayList<>();
                     SalesProductsModel salesProductsModel = new SalesProductsModel();
-                    salesProductsModel = salesProductRepository.save(sales.getSaleProductId().get(0));
+                    salesProductsModel = salesProductRepository.save(sales.getSaleProductList().get(0));
                     salesProductsList.add(salesProductsModel);
-                    sales.setSaleProductId(salesProductsList);
+                    sales.setSaleProductList(salesProductsList);
 
                 }
 
@@ -58,6 +55,11 @@ public class SalesServices {
             ex.printStackTrace();
         }
         return "okkkkkkkkk";
+    }
+
+
+    public List<SalesModel> getAllSalesForPortal(){
+        return (List<SalesModel>) salesRepository.findAll();
     }
 
 
