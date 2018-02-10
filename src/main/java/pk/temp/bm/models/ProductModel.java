@@ -38,32 +38,22 @@ public class ProductModel implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="created_date")
-    private Date createdDate;
-
-    private boolean enabled;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="last_udate")
-    private Date lastUdate;
+    @Column(name="product_code")
+    private Date productCode;
 
     private String name;
 
-    @Column(name="out_of_stock")
-    private boolean outOfStock;
-
     private double price;
 
-    private String sku;
+    private boolean enabled;
 
-    @Column(name="special_price")
-    private double specialPrice;
+    @Column(name="created_date")
+    private Date createdDate;
 
-    private String upc;
 
-    public ProductModel() {
-    }
+    @Column(name = "unit")
+    private String unit;
+
 
     public int getId() {
         return this.id;
@@ -71,14 +61,6 @@ public class ProductModel implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Date getCreatedDate() {
-        return this.createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
     }
 
     public boolean getEnabled() {
@@ -89,28 +71,12 @@ public class ProductModel implements Serializable {
         this.enabled = enabled;
     }
 
-    public Date getLastUdate() {
-        return this.lastUdate;
-    }
-
-    public void setLastUdate(Date lastUdate) {
-        this.lastUdate = lastUdate;
-    }
-
     public String getName() {
         return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean getOutOfStock() {
-        return this.outOfStock;
-    }
-
-    public void setOutOfStock(boolean outOfStock) {
-        this.outOfStock = outOfStock;
     }
 
     public double getPrice() {
@@ -121,28 +87,27 @@ public class ProductModel implements Serializable {
         this.price = price;
     }
 
-    public String getSku() {
-        return this.sku;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setSku(String sku) {
-        this.sku = sku;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
-    public double getSpecialPrice() {
-        return this.specialPrice;
+    public Date getProductCode() {
+        return productCode;
     }
 
-    public void setSpecialPrice(double specialPrice) {
-        this.specialPrice = specialPrice;
+    public void setProductCode(Date productCode) {
+        this.productCode = productCode;
     }
 
-    public String getUpc() {
-        return this.upc;
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
-    public void setUpc(String upc) {
-        this.upc = upc;
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
-
 }

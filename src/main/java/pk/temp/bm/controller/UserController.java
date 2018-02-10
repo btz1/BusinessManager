@@ -50,7 +50,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/getUsers", method = RequestMethod.POST)
+    @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public JSONObject getUser()
             throws JsonProcessingException, ParseException {
 

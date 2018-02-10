@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name="customer")
-//@NamedQuery(name="Customer.findAll", query="SELECT c FROM Customer c")
+@NamedQuery(name="CustomerModel.findAll", query="SELECT c FROM CustomerModel c")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")

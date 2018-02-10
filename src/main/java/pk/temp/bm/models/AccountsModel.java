@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name="accounts")
-//@NamedQuery(name="Accounts.findAll", query="SELECT a FROM Accounts a")
+@NamedQuery(name="AccountsModel.findAll", query="SELECT a FROM AccountsModel a")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")

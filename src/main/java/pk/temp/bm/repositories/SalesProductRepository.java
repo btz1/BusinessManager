@@ -9,5 +9,5 @@ import pk.temp.bm.models.SalesProductsModel;
  */
 
 @Repository
-interface SalesProductReposiotry extends CrudRepository<SalesProductsModel,Long> {
+public interface SalesProductRepository extends CrudRepository<SalesProductsModel,Long> {
 }

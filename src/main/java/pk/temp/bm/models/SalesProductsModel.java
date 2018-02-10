@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Table(name="sales_products")
-//@NamedQuery(name="SalesProducts.findAll", query="SELECT s FROM SalesProducts s")
+@NamedQuery(name="SalesProductsModel.findAll", query="SELECT s FROM SalesProductsModel s")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
@@ -32,9 +32,9 @@ public class SalesProductsModel implements Serializable{
     @JoinColumn(name="id")
     private List<SalesModel> salesList;
 
-    /*@ManyToMany
+    @OneToOne
     @JoinColumn(name="product_id")
-    private Customer productId;*/
+    private ProductModel productId;
 
     public String getQuantity() {
         return quantity;
@@ -58,5 +58,13 @@ public class SalesProductsModel implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public ProductModel getProductId() {
+        return productId;
+    }
+
+    public void setProductId(ProductModel productId) {
+        this.productId = productId;
     }
 }

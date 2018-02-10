@@ -11,10 +11,10 @@ import java.util.List;
 
 @Entity
 @Table(name="sales")
-//@NamedQuery(name="Sales.findAll", query="SELECT s FROM sales s")
+@NamedQuery(name="SalesModel.findAll", query="SELECT s FROM SalesModel s")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id")
+        property = "sales_id")
 public class SalesModel implements Serializable{
     private static final long serialVersionUID = 1L;
 
@@ -26,17 +26,26 @@ public class SalesModel implements Serializable{
     @Column(name="total_amount", nullable=false, length=100)
     private String totalAmount;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name="sale_date", nullable = false)
     private String saleDate;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name="deliver_date", nullable = false)
     private String deliverDate;
 
-    @OneToMany
+    @Column(name="advance_payment", nullable=false, length=100)
+    private String advancePayment;
+
+    @OneToMany()
     @JoinColumn(name="id")
-    private List<CustomerModel> customerList ;
+    private List<CustomerModel> customerId;
+
+    @ManyToMany
+    @JoinColumn(name="id")
+    private List<SalesProductsModel> saleProductId;
+
+
 
     public String getTotalAmount() {
         return totalAmount;
@@ -62,19 +71,35 @@ public class SalesModel implements Serializable{
         this.deliverDate = deliverDate;
     }
 
-    public List<CustomerModel> getCustomerList() {
-        return customerList;
-    }
-
-    public void setCustomerList(List<CustomerModel> customerList) {
-        this.customerList = customerList;
-    }
-
     public Long getSales_id() {
         return sales_id;
     }
 
     public void setSales_id(Long sales_id) {
         this.sales_id = sales_id;
+    }
+
+    public String getAdvancePayment() {
+        return advancePayment;
+    }
+
+    public void setAdvancePayment(String advancePayment) {
+        this.advancePayment = advancePayment;
+    }
+
+    public List<CustomerModel> getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(List<CustomerModel> customerId) {
+        this.customerId = customerId;
+    }
+
+    public List<SalesProductsModel> getSaleProductId() {
+        return saleProductId;
+    }
+
+    public void setSaleProductId(List<SalesProductsModel> saleProductId) {
+        this.saleProductId = saleProductId;
     }
 }
