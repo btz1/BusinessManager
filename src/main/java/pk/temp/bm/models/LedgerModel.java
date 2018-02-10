@@ -13,12 +13,12 @@ import java.util.List;
  */
 
 @Entity
-@Table(name="accounts")
-@NamedQuery(name="AccountsModel.findAll", query="SELECT a FROM AccountsModel a")
+@Table(name="ledger")
+@NamedQuery(name="LedgerModel.findAll", query="SELECT a FROM LedgerModel a")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
-public class AccountsModel implements Serializable{
+public class LedgerModel implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -27,32 +27,32 @@ public class AccountsModel implements Serializable{
     private Long id;
 
     @Column(name="debit" , nullable=false, length=100)
-    private Integer debitAmount;
+    private Double debitAmount;
 
     @Column(name="credit", nullable=false, length=100)
-    private String creditAmount;
+    private Double creditAmount;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
     private String date;
 
-    @OneToMany
-    @JoinColumn(name="customer_id")
-    private List<CustomerModel> customerList;
+    @OneToOne
+    private CustomerModel customer;
 
-    public Integer getDebitAmount() {
+
+    public Double getDebitAmount() {
         return debitAmount;
     }
 
-    public void setDebitAmount(Integer debitAmount) {
+    public void setDebitAmount(Double debitAmount) {
         this.debitAmount = debitAmount;
     }
 
-    public String getCreditAmount() {
+    public Double getCreditAmount() {
         return creditAmount;
     }
 
-    public void setCreditAmount(String creditAmount) {
+    public void setCreditAmount(Double creditAmount) {
         this.creditAmount = creditAmount;
     }
 
@@ -72,11 +72,11 @@ public class AccountsModel implements Serializable{
         this.id = id;
     }
 
-    public List<CustomerModel> getCustomerList() {
-        return customerList;
+    public CustomerModel getCustomer() {
+        return customer;
     }
 
-    public void setCustomerList(List<CustomerModel> customerList) {
-        this.customerList = customerList;
+    public void setCustomer(CustomerModel customer) {
+        this.customer = customer;
     }
 }

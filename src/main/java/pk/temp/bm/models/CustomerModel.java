@@ -40,6 +40,9 @@ public class CustomerModel implements Serializable {
     private String city;
 
     @OneToMany
+    private List<LedgerModel> ledgerEntries;
+
+    @OneToMany
     @JoinColumn(name = "id")
     private List<SalesModel> salesList;
 
@@ -97,5 +100,21 @@ public class CustomerModel implements Serializable {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public List<SalesModel> getSalesList() {
+        return salesList;
+    }
+
+    public void setSalesList(List<SalesModel> salesList) {
+        this.salesList = salesList;
+    }
+
+    public List<LedgerModel> getLedgerEntries() {
+        return ledgerEntries;
+    }
+
+    public void setLedgerEntries(List<LedgerModel> ledgerEntries) {
+        this.ledgerEntries = ledgerEntries;
     }
 }
