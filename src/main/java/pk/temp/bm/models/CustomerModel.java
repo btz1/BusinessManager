@@ -1,7 +1,9 @@
 package pk.temp.bm.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -40,11 +42,17 @@ public class CustomerModel implements Serializable {
     private String city;
 
     @OneToMany
+    @JoinColumn(name = "id")
+    @JsonIgnore
     private List<LedgerModel> ledgerEntries;
 
     @OneToMany
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "sales_id")
+    @JsonIgnore
     private List<SalesModel> salesList;
+
+    @Transient
+    private Double balance;
 
     public Integer getId() {
         return id;
@@ -116,5 +124,13 @@ public class CustomerModel implements Serializable {
 
     public void setLedgerEntries(List<LedgerModel> ledgerEntries) {
         this.ledgerEntries = ledgerEntries;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 }

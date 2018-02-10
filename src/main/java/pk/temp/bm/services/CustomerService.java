@@ -19,7 +19,7 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     @Transactional
-    public void getAllCustomersSummary(){
+    public List<CustomerModel> getAllCustomersSummary(){
         List<CustomerModel> customerModelList = (List<CustomerModel>) customerRepository.findAll();
 
         for(CustomerModel customerModel : customerModelList){
@@ -37,7 +37,12 @@ public class CustomerService {
             * -ve -> customer has to pay the company
             * */
             Double balance = sumOfDebits - sumOfCredits;
-
+            customerModel.setBalance(balance);
         }
+        return customerModelList;
+    }
+
+    public void createNewCustomer(CustomerModel customerModel){
+        customerRepository.save(customerModel);
     }
 }
