@@ -51,6 +51,9 @@ public class CustomerModel implements Serializable {
     @JsonIgnore
     private List<SalesModel> salesList;
 
+    @Column(name = "phnone")
+    private String phoneNumber;
+
     @Transient
     private Double balance;
 
@@ -132,5 +135,13 @@ public class CustomerModel implements Serializable {
 
     public void setBalance(Double balance) {
         this.balance = balance;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

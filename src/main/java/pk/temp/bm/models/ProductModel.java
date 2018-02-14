@@ -43,17 +43,21 @@ public class ProductModel implements Serializable {
 
     private String name;
 
-    private double price;
+    private Double price;
+
+    @Column(name = "special_price")
+    private Double specialPrice;
 
     private boolean enabled;
 
-    @Column(name="created_date")
+    @Column(name="created_on")
     private Date createdDate;
 
+    @Column(name="updated_on")
+    private Date updatedOn;
 
     @Column(name = "unit")
     private String unit;
-
 
     public int getId() {
         return this.id;
@@ -109,5 +113,21 @@ public class ProductModel implements Serializable {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Date getUpdatedOn() {
+        return updatedOn;
+    }
+
+    public void setUpdatedOn(Date updatedOn) {
+        this.updatedOn = updatedOn;
+    }
+
+    public Double getSpecialPrice() {
+        return specialPrice;
+    }
+
+    public void setSpecialPrice(Double specialPrice) {
+        this.specialPrice = specialPrice;
     }
 }

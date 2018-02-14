@@ -185,7 +185,7 @@ public class LoadResources {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {
-            Connection connection = CoreDbConnection.getOeDbConnection();
+            Connection connection = CoreDbConnection.getBmDbConnection();
             statement = connection.prepareStatement(query);
             if(null != params){
                 int parameterIndex = 1;

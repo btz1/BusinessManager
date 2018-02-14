@@ -24,7 +24,7 @@ public class CoreDbConnection {
         return DriverManager.getConnection(url,userName,password);
     }
 
-    public static Connection getOeDbConnection() throws Exception{
+    public static Connection getBmDbConnection() throws Exception{
         Environment environment = ApplicationContextHolder.getContext().getEnvironment();
         String server = environment.getProperty("talend.host_db");
         String port = environment.getProperty("talend.port_db");
@@ -33,17 +33,5 @@ public class CoreDbConnection {
         String dbName = environment.getProperty("talend.name_db");
 
         return createMysqlConnection(server,port,dbName,userName,password);
-    }
-
-    public static Connection getZeenConnection() throws Exception {
-        Environment environment = ApplicationContextHolder.getContext().getEnvironment();
-        String server = environment.getProperty("zeen.host");
-        String port = environment.getProperty("zeen.port");
-        String userName = environment.getProperty("zeen.userName");
-        String password = environment.getProperty("zeen.password");
-        String dbName = environment.getProperty("zeen.dbName");
-        Connection connection = createSqlServerConnection(server,port,dbName,userName,password);
-        connection.setAutoCommit(false);
-        return connection;
     }
 }

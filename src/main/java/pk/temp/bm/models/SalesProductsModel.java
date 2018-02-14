@@ -34,7 +34,7 @@ public class SalesProductsModel implements Serializable{
 
     @OneToOne
     @JoinColumn(name="product_id")
-    private ProductModel productId;
+    private ProductModel productModel;
 
     public String getQuantity() {
         return quantity;
@@ -60,11 +60,11 @@ public class SalesProductsModel implements Serializable{
         this.id = id;
     }
 
-    public ProductModel getProductId() {
-        return productId;
+    public ProductModel getProductModel() {
+        return productModel;
     }
 
-    public void setProductId(ProductModel productId) {
-        this.productId = productId;
+    public void setProductModel(ProductModel productModel) {
+        this.productModel = productModel;
     }
 }

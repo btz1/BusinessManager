@@ -7,19 +7,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pk.temp.bm.models.CustomerModel;
 import pk.temp.bm.models.SalesModel;
-import pk.temp.bm.services.SalesServices;
+import pk.temp.bm.services.SalesService;
+import pk.temp.bm.utilities.BMDateUtils;
+import pk.temp.bm.utilities.DeadlineFinder;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
 public class SalesController {
 
     @Autowired
-    private SalesServices salesServices;
+    private SalesService salesService;
+    @Autowired
+    private DeadlineFinder deadlineFinder;
 
     @RequestMapping(value = "/salesData",method = RequestMethod.POST)
     public String saveSalesData(@RequestParam("jsonObject") String jsonObject){
-        salesServices.saveSalesData(jsonObject);
+        salesService.saveSalesData(jsonObject);
         return "";
     }
 
@@ -31,7 +36,14 @@ public class SalesController {
 
     @RequestMapping(value = "/getAllSales", method = RequestMethod.GET)
     public List<SalesModel> getAllSales(){
-        return salesServices.getAllSalesForPortal();
+        return salesService.getAllSalesForPortal();
+    }
+
+    @RequestMapping(value = "/getSalesDeadlines", method = RequestMethod.GET)
+    public String getSalesDeadlines(/*@RequestParam("date") String stringDate*/) throws Exception {
+//        Date date = BMDateUtils.parseAnyStringToDate(stringDate);
+        Date date = new Date();
+        return deadlineFinder.checkForDeadLines(date);
     }
 
 }

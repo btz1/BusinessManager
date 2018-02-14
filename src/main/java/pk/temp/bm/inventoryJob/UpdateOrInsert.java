@@ -139,7 +139,7 @@ public class UpdateOrInsert implements Runnable{
                 Map<String,Object> queryMap = createQuery(action, keyColumn);
                 Map<String,Integer> paramPositionMap = (Map<String, Integer>) queryMap.get("paramPositions");
                 String query = (String) queryMap.get("query");
-//                connection = CoreDbConnection.getOeDbConnection();
+//                connection = CoreDbConnection.getBmDbConnection();
 //                connection.setAutoCommit(false);
                 ps = productColToReturn.length != 0 ? connection.prepareStatement(query, productColToReturn) : connection.prepareStatement(query) ;
                 long start = System.currentTimeMillis();

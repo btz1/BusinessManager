@@ -12,10 +12,11 @@ import pk.temp.bm.repositories.SalesProductRepository;
 import pk.temp.bm.repositories.SalesRepository;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
-public class SalesServices {
+public class SalesService {
 
     @Autowired
     private SalesRepository salesRepository;
@@ -55,6 +56,10 @@ public class SalesServices {
             ex.printStackTrace();
         }
         return "okkkkkkkkk";
+    }
+
+    public List<SalesModel> getAllByDeliverDateBetween(String startDate, String endDate){
+        return salesRepository.getAllByDeliverDateBetween(startDate,endDate);
     }
 
 

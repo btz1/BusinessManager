@@ -15,17 +15,17 @@ import java.util.List;
 @NamedQuery(name="SalesModel.findAll", query="SELECT s FROM SalesModel s")
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "sales_id")
+        property = "salesId")
 public class SalesModel implements Serializable{
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(unique=true, nullable=false)
-    private Long sales_id;
+    @Column(unique=true, nullable=false, name = "sales_id")
+    private Long salesId;
 
     @Column(name="total_amount", nullable=false, length=100)
-    private String totalAmount;
+    private Double totalAmount;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name="sale_date", nullable = false)
@@ -36,7 +36,7 @@ public class SalesModel implements Serializable{
     private String deliverDate;
 
     @Column(name="advance_payment", nullable=false, length=100)
-    private String advancePayment;
+    private Double advancePayment;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonIgnore
@@ -52,11 +52,11 @@ public class SalesModel implements Serializable{
 
 
 
-    public String getTotalAmount() {
+    public Double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(String totalAmount) {
+    public void setTotalAmount(Double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -76,19 +76,19 @@ public class SalesModel implements Serializable{
         this.deliverDate = deliverDate;
     }
 
-    public Long getSales_id() {
-        return sales_id;
+    public Long getSalesId() {
+        return salesId;
     }
 
-    public void setSales_id(Long sales_id) {
-        this.sales_id = sales_id;
+    public void setSalesId(Long salesId) {
+        this.salesId = salesId;
     }
 
-    public String getAdvancePayment() {
+    public Double getAdvancePayment() {
         return advancePayment;
     }
 
-    public void setAdvancePayment(String advancePayment) {
+    public void setAdvancePayment(Double advancePayment) {
         this.advancePayment = advancePayment;
     }
 

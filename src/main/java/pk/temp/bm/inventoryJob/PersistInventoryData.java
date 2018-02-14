@@ -43,7 +43,7 @@ public class PersistInventoryData implements Thread.UncaughtExceptionHandler, Ru
         this.partialUpdate = partialUpdate;
         this.countDownLatch = countDownLatch;
         this.insertAndUpdateDataList = insertAndUpdateDataList;
-        this.connection = CoreDbConnection.getOeDbConnection();
+        this.connection = CoreDbConnection.getBmDbConnection();
         connection.setAutoCommit(false);
     }
 
