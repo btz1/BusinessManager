@@ -5,11 +5,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pk.temp.bm.models.CustomerModel;
+import pk.temp.bm.models.SalePaymentsModel;
 import pk.temp.bm.models.SalesModel;
 import pk.temp.bm.models.SalesProductsModel;
 import pk.temp.bm.repositories.CustomerRepository;
+import pk.temp.bm.repositories.SalePaymentsRepository;
 import pk.temp.bm.repositories.SalesProductRepository;
 import pk.temp.bm.repositories.SalesRepository;
+import pk.temp.bm.utilities.BMDateUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +27,8 @@ public class SalesService {
     private CustomerRepository customerRepository;
     @Autowired
     private SalesProductRepository salesProductRepository;
+    @Autowired
+    private SalePaymentsRepository salePaymentsRepository;
 
     public String saveSalesData(String jsonObject){
         SalesModel sales =null;
@@ -34,8 +39,10 @@ public class SalesService {
             if (sales != null){
 
                 CustomerModel customerModel = new CustomerModel();
-                System.out.println(sales.getCustomer());
-                customerModel = customerRepository.save(sales.getCustomer());
+                customerModel = sales.getCustomer();
+                if(null == customerModel.getId()){
+                    customerModel = customerRepository.save(sales.getCustomer());
+                }
                 sales.setCustomer(customerModel);
 
                 if (sales.getSaleProductList() != null){
@@ -46,9 +53,16 @@ public class SalesService {
                     sales.setSaleProductList(salesProductsList);
 
                 }
-
                 salesRepository.save(sales);
                 System.out.println("data saved");
+
+                Double advancePayment = sales.getAdvancePayment();
+                SalePaymentsModel salePaymentsModel = new SalePaymentsModel();
+                salePaymentsModel.setAmountPaid(advancePayment);
+                salePaymentsModel.setPaidOn(new Date());
+                salePaymentsModel.setSale(sales);
+                salePaymentsModel.setSalePaymentCleared(advancePayment.equals(sales.getTotalAmount()));
+                salePaymentsRepository.save(salePaymentsModel);
             }
 
 
