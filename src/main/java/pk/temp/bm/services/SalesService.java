@@ -81,5 +81,9 @@ public class SalesService {
         return (List<SalesModel>) salesRepository.findAll();
     }
 
+    public SalesModel findById(Long empId){
+        return salesRepository.findOne(empId);
+    }
+
 
 }
