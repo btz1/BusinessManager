@@ -42,7 +42,7 @@ public class EmployeeSalaryService {
         return employeeSalaryRepository.findByEmployee(employeeModel);
     }
 
-    public Double getCurrentSalary(Long empId){
+    public JSONObject getCurrentSalary(Long empId){
         EmployeeModel employeeModel;
         Double currentSalary;
         JSONObject jsonObject = new JSONObject();
@@ -60,12 +60,18 @@ public class EmployeeSalaryService {
             JSONArray jsonArray = new JSONArray();
             employeeModel = salaryHistoryOfMonth.get(0).getEmployee();
             for(EmployeeSalaryModel salaryModel : salaryHistoryOfMonth){
+                JSONObject detail = new JSONObject();
+                detail.put("paidOn",BMDateUtils.getMySQLDateString(salaryModel.getDate()));
+                detail.put("paidAmount",salaryModel.getPaidAmount());
+                jsonArray.add(detail);
                 alreadyPaidThisMonth += salaryModel.getPaidAmount();
             }
+            jsonObject.put("paymentDetail",jsonArray);
         }
         currentSalary = employeeModel.getPerMonthSalary() - alreadyPaidThisMonth;
-        jsonObject.put("currentSalary",currentSalary);
-        return currentSalary;
+        jsonObject.put("totalSalary",employeeModel.getPerMonthSalary());
+        jsonObject.put("currentPayable",currentSalary);
+        return jsonObject;
     }
 
 

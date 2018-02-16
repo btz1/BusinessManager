@@ -1,5 +1,6 @@
 package pk.temp.bm.controller;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class EmployeeSalaryController {
     }
 
     @RequestMapping(value = "/getCurrentPayableSalary")
-    public Double getCurrentPayableSalary(/*@RequestParam("empId") Long empId*/){
+    public JSONObject getCurrentPayableSalary(/*@RequestParam("empId") Long empId*/){
         Long empId = 1L;
         return employeeSalaryService.getCurrentSalary(empId);
     }
