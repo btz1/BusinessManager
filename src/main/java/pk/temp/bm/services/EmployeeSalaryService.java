@@ -1,12 +1,16 @@
 package pk.temp.bm.services;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pk.temp.bm.models.EmployeeModel;
 import pk.temp.bm.models.EmployeeSalaryModel;
 import pk.temp.bm.repositories.AttendanceRepository;
 import pk.temp.bm.repositories.EmployeeSalaryRepository;
+import pk.temp.bm.utilities.BMDateUtils;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +21,8 @@ public class EmployeeSalaryService {
     private EmployeeSalaryRepository employeeSalaryRepository;
     @Autowired
     private AttendanceService attendanceService;
+    @Autowired
+    private EmployeeService employeeService;
 
     public void paySalary(Long employeeId, Double amountPaid, Date paidOn){
         EmployeeSalaryModel employeeSalaryModel = new EmployeeSalaryModel();
@@ -33,7 +39,33 @@ public class EmployeeSalaryService {
     public List<EmployeeSalaryModel> getEmployeeSalaryHistory(Long empId){
         EmployeeModel employeeModel = new EmployeeModel();
         employeeModel.setId(empId);
-        return employeeSalaryRepository.findByEmployee();
+        return employeeSalaryRepository.findByEmployee(employeeModel);
+    }
+
+    public Double getCurrentSalary(Long empId){
+        EmployeeModel employeeModel;
+        Double currentSalary;
+        JSONObject jsonObject = new JSONObject();
+        Date currentDate = new Date();
+        Date monthStart = BMDateUtils.getStartDateOfMonth(currentDate);
+        monthStart = BMDateUtils.getDateForStartOfDay(monthStart);
+        Date monthEnd = BMDateUtils.getEndDateOfMonth(currentDate);
+        monthEnd = BMDateUtils.getDateForEndOfDay(monthEnd);
+
+        double alreadyPaidThisMonth = 0;
+        List<EmployeeSalaryModel> salaryHistoryOfMonth = employeeSalaryRepository.findByDateBetween(monthStart,monthEnd);
+        if(salaryHistoryOfMonth.isEmpty()){
+            employeeModel = employeeService.findById(empId);
+        } else {
+            JSONArray jsonArray = new JSONArray();
+            employeeModel = salaryHistoryOfMonth.get(0).getEmployee();
+            for(EmployeeSalaryModel salaryModel : salaryHistoryOfMonth){
+                alreadyPaidThisMonth += salaryModel.getPaidAmount();
+            }
+        }
+        currentSalary = employeeModel.getPerMonthSalary() - alreadyPaidThisMonth;
+        jsonObject.put("currentSalary",currentSalary);
+        return currentSalary;
     }
 
 

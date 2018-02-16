@@ -113,6 +113,20 @@ public class BMDateUtils {
         return getMySQLDateString(date);
     }
 
+    public static Date getStartDateOfMonth(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        return calendar.getTime();
+    }
+
+    public static Date getEndDateOfMonth(Date date){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        return calendar.getTime();
+    }
+
     public static Date getDateForEndOfDay(Date date){
         Calendar calendar = Calendar.getInstance();
         date = getDateForStartOfDay(date);

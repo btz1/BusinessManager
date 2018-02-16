@@ -22,6 +22,9 @@ public class EmployeeModel implements Serializable{
     @Column(name = "salary_per_day")
     private Long perDaySalary;
 
+    @Column(name = "salary_per_month")
+    private Long perMonthSalary;
+
     @Column
     private String address;
 
@@ -96,5 +99,13 @@ public class EmployeeModel implements Serializable{
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public Long getPerMonthSalary() {
+        return perMonthSalary;
+    }
+
+    public void setPerMonthSalary(Long perMonthSalary) {
+        this.perMonthSalary = perMonthSalary;
     }
 }

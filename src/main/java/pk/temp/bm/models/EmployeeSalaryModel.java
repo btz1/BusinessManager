@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "salaries_paid")
+@Table(name = "employee_salary")
 public class EmployeeSalaryModel {
 
     @Id

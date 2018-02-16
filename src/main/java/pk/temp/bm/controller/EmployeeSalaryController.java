@@ -44,8 +44,9 @@ public class EmployeeSalaryController {
     }
 
     @RequestMapping(value = "/getCurrentPayableSalary")
-    public void getCurrentPayableSalary(@RequestParam("empId") Long empId){
-
+    public Double getCurrentPayableSalary(/*@RequestParam("empId") Long empId*/){
+        Long empId = 1L;
+        return employeeSalaryService.getCurrentSalary(empId);
     }
 
 }
