@@ -39,7 +39,7 @@ public class ProductModel implements Serializable {
     private int id;
 
     @Column(name="product_code")
-    private Date productCode;
+    private String productCode;
 
     private String name;
 
@@ -99,14 +99,6 @@ public class ProductModel implements Serializable {
         this.unit = unit;
     }
 
-    public Date getProductCode() {
-        return productCode;
-    }
-
-    public void setProductCode(Date productCode) {
-        this.productCode = productCode;
-    }
-
     public Date getCreatedDate() {
         return createdDate;
     }
@@ -129,5 +121,13 @@ public class ProductModel implements Serializable {
 
     public void setSpecialPrice(Double specialPrice) {
         this.specialPrice = specialPrice;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 }

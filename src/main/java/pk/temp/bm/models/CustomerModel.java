@@ -51,7 +51,7 @@ public class CustomerModel implements Serializable {
     @JsonIgnore
     private List<SalesModel> salesList;
 
-    @Column(name = "phnone")
+    @Column(name = "phone")
     private String phoneNumber;
 
     @Transient
