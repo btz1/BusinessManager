@@ -26,6 +26,9 @@ public class SalePaymentsModel implements Serializable{
     @Column(name = "sale_payment_cleared")
     private Boolean salePaymentCleared;
 
+    @Column(name = "cash_payment")
+    private Boolean cashPayment;
+
     public Long getId() {
         return id;
     }
@@ -64,5 +67,13 @@ public class SalePaymentsModel implements Serializable{
 
     public void setSalePaymentCleared(Boolean salePaymentCleared) {
         this.salePaymentCleared = salePaymentCleared;
+    }
+
+    public Boolean getCashPayment() {
+        return cashPayment;
+    }
+
+    public void setCashPayment(Boolean cashPayment) {
+        this.cashPayment = cashPayment;
     }
 }

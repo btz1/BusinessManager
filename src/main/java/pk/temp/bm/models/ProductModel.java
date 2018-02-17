@@ -59,6 +59,9 @@ public class ProductModel implements Serializable {
     @Column(name = "unit")
     private String unit;
 
+    @Column(name = "urdu_name")
+    private String urduName;
+
     public int getId() {
         return this.id;
     }
@@ -129,5 +132,13 @@ public class ProductModel implements Serializable {
 
     public void setProductCode(String productCode) {
         this.productCode = productCode;
+    }
+
+    public String getUrduName() {
+        return urduName;
+    }
+
+    public void setUrduName(String urduName) {
+        this.urduName = urduName;
     }
 }
