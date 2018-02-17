@@ -2,16 +2,12 @@ package pk.temp.bm.services;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pk.temp.bm.models.CustomerModel;
-import pk.temp.bm.models.SalePaymentsModel;
-import pk.temp.bm.models.SalesModel;
-import pk.temp.bm.models.SalesProductsModel;
-import pk.temp.bm.repositories.CustomerRepository;
-import pk.temp.bm.repositories.SalePaymentsRepository;
-import pk.temp.bm.repositories.SalesProductRepository;
-import pk.temp.bm.repositories.SalesRepository;
+import pk.temp.bm.models.*;
+import pk.temp.bm.repositories.*;
 import pk.temp.bm.utilities.BMDateUtils;
 
 import java.util.ArrayList;
@@ -21,6 +17,8 @@ import java.util.List;
 @Service
 public class SalesService {
 
+    private static final Logger logger = LoggerFactory.getLogger(SalesService.class);
+
     @Autowired
     private SalesRepository salesRepository;
     @Autowired
@@ -29,8 +27,11 @@ public class SalesService {
     private SalesProductRepository salesProductRepository;
     @Autowired
     private SalePaymentsRepository salePaymentsRepository;
+    @Autowired
+    private LedgerRepository ledgerRepository;
 
-    public String saveSalesData(String jsonObject){
+    public Boolean saveSalesData(String jsonObject){
+        Boolean actionStatus = false;
         SalesModel sales =null;
         try{
             ObjectMapper objectMapper = new ObjectMapper();
@@ -54,22 +55,38 @@ public class SalesService {
 
                 }
                 salesRepository.save(sales);
-                System.out.println("data saved");
+
+                // credit entry, in any case
+                LedgerModel ledgerModel = new LedgerModel();
+                ledgerModel.setCustomer(customerModel);
+                ledgerModel.setDate(new Date());
+                ledgerModel.setCreditAmount(sales.getTotalAmount());
+                ledgerRepository.save(ledgerModel);
+
+                actionStatus = true;
 
                 Double advancePayment = sales.getAdvancePayment();
-                SalePaymentsModel salePaymentsModel = new SalePaymentsModel();
-                salePaymentsModel.setAmountPaid(advancePayment);
-                salePaymentsModel.setPaidOn(new Date());
-                salePaymentsModel.setSale(sales);
-                salePaymentsModel.setSalePaymentCleared(advancePayment.equals(sales.getTotalAmount()));
-                salePaymentsRepository.save(salePaymentsModel);
+                if(null != advancePayment && 0 != advancePayment){
+                    SalePaymentsModel salePaymentsModel = new SalePaymentsModel();
+                    salePaymentsModel.setAmountPaid(advancePayment);
+                    salePaymentsModel.setPaidOn(new Date());
+                    salePaymentsModel.setSale(sales);
+                    salePaymentsModel.setSalePaymentCleared(advancePayment.equals(sales.getTotalAmount()));
+                    salePaymentsRepository.save(salePaymentsModel);
+
+                    // debit entry, only in case of advance payment
+                    ledgerModel = new LedgerModel();
+                    ledgerModel.setCustomer(customerModel);
+                    ledgerModel.setDate(new Date());
+                    ledgerModel.setDebitAmount(sales.getAdvancePayment());
+                    ledgerRepository.save(ledgerModel);
+                }
+
             }
-
-
         }catch (Exception ex){
-            ex.printStackTrace();
+            logger.error("Error While Creating a Sale Entry. "+ex.getMessage(),ex);
         }
-        return "okkkkkkkkk";
+        return actionStatus;
     }
 
     public List<SalesModel> getAllByDeliverDateBetween(String startDate, String endDate){

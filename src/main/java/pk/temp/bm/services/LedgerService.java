@@ -2,6 +2,7 @@ package pk.temp.bm.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pk.temp.bm.models.LedgerModel;
 import pk.temp.bm.repositories.LedgerRepository;
 
 @Service
@@ -12,5 +13,9 @@ public class LedgerService {
 
     public void getAllAccounts(){
 
+    }
+
+    public void addToLedger(LedgerModel ledgerModel){
+        ledgerRepository.save(ledgerModel);
     }
 }

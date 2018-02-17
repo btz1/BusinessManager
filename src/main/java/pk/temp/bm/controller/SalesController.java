@@ -40,9 +40,9 @@ public class SalesController {
     }
 
     @RequestMapping(value = "/getSalesDeadlines", method = RequestMethod.GET)
-    public String getSalesDeadlines(/*@RequestParam("date") String stringDate*/) throws Exception {
-//        Date date = BMDateUtils.parseAnyStringToDate(stringDate);
-        Date date = new Date();
+    public String getSalesDeadlines(@RequestParam("date") String stringDate) throws Exception {
+        Date date = BMDateUtils.parseAnyStringToDate(stringDate);
+//        Date date = new Date();
         return deadlineFinder.checkForDeadLines(date);
     }
 

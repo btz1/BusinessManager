@@ -5,8 +5,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pk.temp.bm.models.LedgerModel;
 import pk.temp.bm.models.SalePaymentsModel;
 import pk.temp.bm.models.SalesModel;
+import pk.temp.bm.repositories.LedgerRepository;
 import pk.temp.bm.repositories.SalePaymentsRepository;
 
 import java.io.IOException;
@@ -22,6 +24,8 @@ public class SalePaymentsService {
     private SalePaymentsRepository salePaymentsRepository;
     @Autowired
     private SalesService salesService;
+    @Autowired
+    private LedgerRepository ledgerRepository;
 
 
     public Boolean addSalePayment(String salePaymentJSON){
@@ -40,9 +44,19 @@ public class SalePaymentsService {
             salePaymentsModel.setPaidOn(new Date());
             salePaymentsRepository.save(salePaymentsModel);
             actionStatus = true;
+
+            LedgerModel ledgerModel = new LedgerModel();
+            ledgerModel.setCustomer(salesModel.getCustomer());
+            ledgerModel.setDate(new Date());
+            ledgerModel.setDebitAmount(salePaymentsModel.getAmountPaid());
+            ledgerRepository.save(ledgerModel);
         } catch (IOException e) {
             logger.error("Error while adding sale payment. "+e.getMessage(),e);
         }
         return actionStatus;
+    }
+
+    public List<SalePaymentsModel> findByCustomer(Long customerId){
+        return salePaymentsRepository.findByCustomer(customerId);
     }
 }

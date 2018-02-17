@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pk.temp.bm.models.SalePaymentsModel;
 import pk.temp.bm.services.SalePaymentsService;
 import pk.temp.bm.services.SalesService;
+
+import java.util.List;
 
 @RestController
 public class SalePaymentsController {
@@ -25,8 +28,12 @@ public class SalePaymentsController {
             }else {
                 return "Error adding sale payment.";
             }
-
         }
+    }
+
+    @RequestMapping(value = "/getCustomerPaymentHistory")
+    public List<SalePaymentsModel> getCustomerPaymentHistory(@RequestParam("customerId") Long customerId){
+        return salePaymentsService.findByCustomer(customerId);
     }
 
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +35,7 @@ public class LedgerModel implements Serializable{
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
-    private String date;
+    private Date date;
 
     @OneToOne
     private CustomerModel customer;
@@ -56,11 +57,11 @@ public class LedgerModel implements Serializable{
         this.creditAmount = creditAmount;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
