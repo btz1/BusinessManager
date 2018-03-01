@@ -2,6 +2,8 @@ package pk.temp.bm.services;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import netscape.javascript.JSObject;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +102,21 @@ public class SalesService {
 
     public SalesModel findById(Long empId){
         return salesRepository.findOne(empId);
+    }
+
+    public JSONObject getDashBoardStats(){
+        Date currentDate = new Date();
+        Date startDate = BMDateUtils.getDateForStartOfDay(BMDateUtils.getStartDateOfMonth(currentDate));
+        Date endDate = BMDateUtils.getDateForEndOfDay(BMDateUtils.getEndDateOfMonth(currentDate));
+        Integer saleCount = salesRepository.getCurrentMonthSales(startDate,endDate);
+        Integer deliveredCount = salesRepository.getCurrentDelivered(startDate,endDate);
+        Integer deliverableCount = salesRepository.getCurrentDeliverable(startDate,endDate);
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("saleCount",saleCount);
+        jsonObject.put("deliveredCount",deliveredCount);
+        jsonObject.put("deliverableCount",deliverableCount);
+        jsonObject.put("returnedCount",deliveredCount);
+        return jsonObject;
     }
 
 

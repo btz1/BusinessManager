@@ -1,5 +1,6 @@
 package pk.temp.bm.controller;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +45,11 @@ public class SalesController {
         Date date = BMDateUtils.parseAnyStringToDate(stringDate);
 //        Date date = new Date();
         return deadlineFinder.checkForDeadLines(date);
+    }
+
+    @RequestMapping(value = "/getDashBoardStats")
+    public JSONObject getDashBoardStats(){
+        return salesService.getDashBoardStats();
     }
 
 }

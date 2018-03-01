@@ -47,6 +47,8 @@ public class SalesModel implements Serializable{
     @JsonIgnore
     private List<SalesProductsModel> saleProductList;
 
+    private Boolean delivered;
+
     @Transient
     private String customerName;
 
@@ -114,5 +116,13 @@ public class SalesModel implements Serializable{
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public Boolean getDelivered() {
+        return delivered;
+    }
+
+    public void setDelivered(Boolean delivered) {
+        this.delivered = delivered;
     }
 }
