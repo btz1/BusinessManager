@@ -20,6 +20,11 @@ public class CustomerController {
     public List<CustomerModel> getAllCustomersSummary(){
         return customerService.getAllCustomersSummary();
     }
+    @RequestMapping(value = "/getAllCustomers",method = RequestMethod.GET)
+    public List<CustomerModel> getAllCustomers(){
+
+        return customerService.getAllCustomers();
+    }
 
     @RequestMapping(value = "/createCustomer", method = RequestMethod.POST)
     public void createCustomer(@RequestParam("customerJson") String customerJson) throws IOException {

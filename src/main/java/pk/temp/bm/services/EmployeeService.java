@@ -9,6 +9,7 @@ import pk.temp.bm.models.EmployeeModel;
 import pk.temp.bm.repositories.EmployeeRepository;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class EmployeeService {
@@ -33,5 +34,9 @@ public class EmployeeService {
             logger.error("Error While creating new Employee."+e.getMessage(),e);
         }
         return actionStatus;
+    }
+
+    public List<EmployeeModel> getAllEmployees(){
+        return (List<EmployeeModel>) employeeRepository.findAll();
     }
 }

@@ -42,6 +42,10 @@ public class CustomerService {
         return customerModelList;
     }
 
+    public List<CustomerModel> getAllCustomers(){
+        return  (List<CustomerModel>) customerRepository.findAll();
+    }
+
     public void createNewCustomer(CustomerModel customerModel){
         customerRepository.save(customerModel);
     }
