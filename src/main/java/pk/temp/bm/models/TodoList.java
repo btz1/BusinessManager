@@ -2,8 +2,10 @@ package pk.temp.bm.models;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.dao.DataAccessException;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "todo_list")
@@ -19,10 +21,10 @@ public class TodoList {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name="date", nullable = false)
-    private String messageDate;
+    private Date messageDate;
 
     @Column(name = "is_done",nullable=false)
-    private boolean enabled;
+    private boolean isDone;
 
     public Long getId() {
         return id;
@@ -40,19 +42,19 @@ public class TodoList {
         this.todoMessage = todoMessage;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+    public boolean isDone() {
+        return isDone;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setDone(boolean done) {
+        this.isDone = done;
     }
 
-    public String getMessageDate() {
+    public Date getMessageDate() {
         return messageDate;
     }
 
-    public void setMessageDate(String messageDate) {
+    public void setMessageDate(Date messageDate) {
         this.messageDate = messageDate;
     }
 }

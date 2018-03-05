@@ -12,7 +12,7 @@ import pk.temp.bm.services.TodoListService;
 import java.util.List;
 
 @RestController
-public class todoController {
+public class TodoController {
 
     @Autowired
     private TodoListService todoListService;
@@ -23,7 +23,7 @@ public class todoController {
        todoListService.saveTodoMessage(todoMessage,isDone);
     }
 
-    @RequestMapping(value = "/getAllTodoMessage", method = RequestMethod.POST)
+    @RequestMapping(value = "/getAllTodoMessage", method = RequestMethod.GET)
     public List<TodoList> getTodoMessageWithDate()
            {
         return todoListService.getAllTodoMessages();

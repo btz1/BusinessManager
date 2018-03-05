@@ -21,10 +21,9 @@ public class TodoListService {
 
         TodoList todoListMessage = new TodoList();
             Date date = new Date();
-            String date1 = date.toString();
             todoListMessage.setTodoMessage(message);
-                todoListMessage.setMessageDate(date1);
-//            todoListMessage.setEnabled(isdone);
+                todoListMessage.setMessageDate(date);
+//            todoListMessage.setDone(isdone);
 
         todoListRepository.save(todoListMessage);
     }

@@ -26,6 +26,7 @@ public class ProductController {
 
     @RequestMapping(value = "/getAllProducts")
     public List<ProductModel> getAllProducts(){
+        System.out.println("Call received...");
         return productService.getAllProducts();
     }
 
