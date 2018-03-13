@@ -180,13 +180,6 @@
 			<version>1.7.1</version>
 		</dependency>
 
-		<!-- TCS lib -->
-		<dependency>
-			<groupId>TcsBookingServiceJar</groupId>
-			<artifactId>TcsBookingServiceJar</artifactId>
-			<version>1.8</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
