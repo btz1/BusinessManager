@@ -14,10 +14,7 @@ import pk.temp.bm.models.EmployeeModel;
 import pk.temp.bm.services.AttendanceService;
 import pk.temp.bm.services.EmployeeService;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class AttendanceController {
@@ -30,7 +27,7 @@ public class AttendanceController {
     private static final Logger logger = LoggerFactory.getLogger(AttendanceController.class);
 
     @RequestMapping(value = "/recordAttendance", method = RequestMethod.POST)
-    public ResponseEntity<?> recordAttendance(@RequestBody String attendanceJSON) throws Exception {
+    public ResponseEntity<?> recordAttendance(@RequestParam("attendanceJSON") String attendanceJSON) throws Exception {
         /* Attendance JSON format
         *
         * {employeeId,true/false}
@@ -42,11 +39,16 @@ public class AttendanceController {
             JSONObject attendanceObject = (JSONObject) parser.parse(attendanceJSON);
             List<AttendanceModel> attendanceModelList = new ArrayList<>();
             Date currentDate = new Date();
-            List<EmployeeModel> existingEmployees = employeeService.getActiveEmployees();
+            Map<String,Object> attendanceMap = new HashMap<>();
+            for(Object object : attendanceObject.entrySet()) {
+                Map.Entry entry = (Map.Entry) object;
+                attendanceMap.put((String) entry.getKey(),entry.getValue());
+            }
+                List<EmployeeModel> existingEmployees = employeeService.getActiveEmployees();
             for(EmployeeModel employeeModel : existingEmployees){
                 Boolean present = true;
-                if(attendanceObject.containsKey(employeeModel.getId())){
-                    present = (Boolean) attendanceObject.get(employeeModel.getId());
+                if(attendanceMap.containsKey(employeeModel.getId())){
+                    present = (Boolean) attendanceMap.get(employeeModel.getId());
                 }
                 AttendanceModel attendanceModel = new AttendanceModel();
                 attendanceModel.setEmployee(employeeModel);
