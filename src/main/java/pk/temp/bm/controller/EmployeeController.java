@@ -21,7 +21,7 @@ public class EmployeeController {
         employeeService.createEmployee(employeeJSON);
     }
 
-    @RequestMapping(value = "/getAllEmployee", method = RequestMethod.POST)
+    @RequestMapping(value = "/getAllEmployee", method = RequestMethod.GET)
     public List<EmployeeModel> getAllEmployees(){
 
        return employeeService.getAllEmployees();

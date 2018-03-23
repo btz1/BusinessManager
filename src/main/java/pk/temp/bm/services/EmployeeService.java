@@ -39,4 +39,8 @@ public class EmployeeService {
     public List<EmployeeModel> getAllEmployees(){
         return (List<EmployeeModel>) employeeRepository.findAll();
     }
+
+    public List<EmployeeModel> getActiveEmployees(){
+        return employeeRepository.findAllByActive(Boolean.TRUE);
+    }
 }

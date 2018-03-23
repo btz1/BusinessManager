@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import pk.temp.bm.models.AttendanceModel;
 import pk.temp.bm.models.EmployeeModel;
 import pk.temp.bm.services.AttendanceService;
+import pk.temp.bm.services.EmployeeService;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +24,8 @@ public class AttendanceController {
 
     @Autowired
     private AttendanceService attendanceService;
+    @Autowired
+    private EmployeeService employeeService;
 
     private static final Logger logger = LoggerFactory.getLogger(AttendanceController.class);
 
@@ -39,17 +42,18 @@ public class AttendanceController {
             JSONObject attendanceObject = (JSONObject) parser.parse(attendanceJSON);
             List<AttendanceModel> attendanceModelList = new ArrayList<>();
             Date currentDate = new Date();
-            for(Object object : attendanceObject.entrySet()){
-                Map.Entry entry = (Map.Entry)object;
+            List<EmployeeModel> existingEmployees = employeeService.getActiveEmployees();
+            for(EmployeeModel employeeModel : existingEmployees){
+                Boolean present = true;
+                if(attendanceObject.containsKey(employeeModel.getId())){
+                    present = (Boolean) attendanceObject.get(employeeModel.getId());
+                }
                 AttendanceModel attendanceModel = new AttendanceModel();
-                EmployeeModel employeeModel = new EmployeeModel();
-                employeeModel.setId(Long.valueOf(entry.getKey().toString()));
                 attendanceModel.setEmployee(employeeModel);
-                attendanceModel.setPresent(Boolean.valueOf(entry.getValue().toString()));
+                attendanceModel.setPresent(present);
                 attendanceModel.setDate(currentDate);
                 attendanceModelList.add(attendanceModel);
             }
-
             attendanceService.markAttendance(attendanceModelList);
             attendanceMarked = true;
         }

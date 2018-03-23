@@ -13,9 +13,6 @@ import java.util.List;
 @Entity
 @Table(name="sales")
 @NamedQuery(name="SalesModel.findAll", query="SELECT s FROM SalesModel s")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "salesId")
 public class SalesModel implements Serializable{
     private static final long serialVersionUID = 1L;
 
@@ -27,11 +24,9 @@ public class SalesModel implements Serializable{
     @Column(name="total_amount", nullable=false, length=100)
     private Double totalAmount;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name="sale_date", nullable = false)
     private String saleDate;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name="deliver_date", nullable = false)
     private String deliverDate;
 
@@ -39,19 +34,13 @@ public class SalesModel implements Serializable{
     private Double advancePayment;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
     private CustomerModel customer;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name="id")
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "sale_id")
     private List<SalesProductsModel> saleProductList;
 
     private Boolean delivered;
-
-    @Transient
-    private String customerName;
-
 
 
     public Double getTotalAmount() {
@@ -112,10 +101,6 @@ public class SalesModel implements Serializable{
 
     public String getCustomerName() {
         return customer.getFirstName();
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
     }
 
     public Boolean getDelivered() {

@@ -27,6 +27,7 @@ public class SalesService {
     @Autowired
     private SalesProductRepository salesProductRepository;
     @Autowired
+
     private SalePaymentsRepository salePaymentsRepository;
     @Autowired
     private LedgerRepository ledgerRepository;

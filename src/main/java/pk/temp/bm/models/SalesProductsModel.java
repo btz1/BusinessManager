@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by Tanzeel on 10/2/2018.
@@ -28,13 +27,15 @@ public class SalesProductsModel implements Serializable{
     @Column(nullable=false, length=100)
     private String quantity;
 
-    @ManyToMany
-    @JoinColumn(name="id")
-    private List<SalesModel> salesList;
+    @OneToOne
+    private SalesModel saleModel;
 
     @OneToOne
     @JoinColumn(name="product_id")
     private ProductModel productModel;
+
+    @Column(name = "sale_price")
+    private Double salePrice;
 
     public String getQuantity() {
         return quantity;
@@ -44,12 +45,12 @@ public class SalesProductsModel implements Serializable{
         this.quantity = quantity;
     }
 
-    public List<SalesModel> getSalesList() {
-        return salesList;
+    public SalesModel getSaleModel() {
+        return saleModel;
     }
 
-    public void setSalesList(List<SalesModel> salesList) {
-        this.salesList = salesList;
+    public void setSaleModel(SalesModel saleModel) {
+        this.saleModel = saleModel;
     }
 
     public Long getId() {
@@ -66,5 +67,13 @@ public class SalesProductsModel implements Serializable{
 
     public void setProductModel(ProductModel productModel) {
         this.productModel = productModel;
+    }
+
+    public Double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(Double salePrice) {
+        this.salePrice = salePrice;
     }
 }
