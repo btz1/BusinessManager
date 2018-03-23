@@ -47,8 +47,8 @@ public class AttendanceController {
                 List<EmployeeModel> existingEmployees = employeeService.getActiveEmployees();
             for(EmployeeModel employeeModel : existingEmployees){
                 Boolean present = true;
-                if(attendanceMap.containsKey(employeeModel.getId())){
-                    present = (Boolean) attendanceMap.get(employeeModel.getId());
+                if(attendanceMap.containsKey(employeeModel.getId().toString())){
+                    present = (Boolean) attendanceMap.get(employeeModel.getId().toString());
                 }
                 AttendanceModel attendanceModel = new AttendanceModel();
                 attendanceModel.setEmployee(employeeModel);
@@ -70,4 +70,8 @@ public class AttendanceController {
         return attendanceService.getEmployeeAttendance(employeeId);
     }
 
+    @RequestMapping(value = "/getALlEmployeeAttendance")
+    public List<AttendanceModel> getAllEmployeeAttendance(){
+        return attendanceService.getAllAttendance();
+    }
 }

@@ -1,10 +1,12 @@
 package pk.temp.bm.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "attendance")
+@Table(name = "attendance", uniqueConstraints = {@UniqueConstraint(columnNames = {"employee_id","date"})})
 public class AttendanceModel {
 
     @Id
@@ -17,6 +19,7 @@ public class AttendanceModel {
     private EmployeeModel employee;
 
     @Column
+    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date date;
 
     @Column
