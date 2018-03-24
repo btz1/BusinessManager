@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,6 +79,10 @@ public class GlobalAppUtil {
                 .filter(map -> map.getKey().contains(tableNamePrefix))
                 .map(p -> p.getKey().replaceAll(tableNamePrefix,""))
                 .collect(Collectors.toList());
+    }
+
+    public static boolean isAllNulls(Iterable<?> array) {
+        return StreamSupport.stream(array.spliterator(), true).allMatch(o -> o == null);
     }
 
 }

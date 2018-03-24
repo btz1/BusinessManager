@@ -43,12 +43,10 @@ public class CustomerModel implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "customer_id")
-    @JsonIgnore
     private List<LedgerModel> ledgerEntries;
 
     @OneToMany
-    @JoinColumn(name = "sales_id")
-    @JsonIgnore
+    @JoinColumn(name = "customer_id")
     private List<SalesModel> salesList;
 
     @Column(name = "phone")
