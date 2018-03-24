@@ -71,6 +71,9 @@ public class EmployeeSalaryService {
         currentSalary = employeeModel.getPerMonthSalary() - alreadyPaidThisMonth;
         jsonObject.put("totalSalary",employeeModel.getPerMonthSalary());
         jsonObject.put("currentPayable",currentSalary);
+        jsonObject.put("employeeId",employeeModel.getId());
+        jsonObject.put("employeeName",employeeModel.getName());
+        jsonObject.put("salaryMonth",BMDateUtils.getCurrentMonth());
         return jsonObject;
     }
 

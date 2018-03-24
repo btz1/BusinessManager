@@ -34,6 +34,11 @@ public class BMDateUtils {
 	public static String getMySQLDateString(Date date){
 		return simpleFormetter.format(date);
 	}
+
+	public static Integer getCurrentMonth(){
+	    Calendar calendar = Calendar.getInstance();
+	    return calendar.get(Calendar.MONTH + 1);
+    }
 	
 	public static Date changeTimeStampToDateOnly(Date date){
 		try {
