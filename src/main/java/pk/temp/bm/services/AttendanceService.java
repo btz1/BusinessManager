@@ -23,4 +23,8 @@ public class AttendanceService {
         employeeModel.setId(employeeId);
         return attendanceRepository.findByEmployee(employeeModel);
     }
+    public List<AttendanceModel> getAllAttendance(){
+        return (List<AttendanceModel>) attendanceRepository.findAll();
+    }
+
 }
