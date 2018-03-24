@@ -49,6 +49,7 @@ public class SalePaymentsService {
             ledgerModel.setCustomer(salesModel.getCustomer());
             ledgerModel.setDate(new Date());
             ledgerModel.setDebitAmount(salePaymentsModel.getAmountPaid());
+            ledgerModel.setCreditAmount(0D);
             ledgerRepository.save(ledgerModel);
         } catch (IOException e) {
             logger.error("Error while adding sale payment. "+e.getMessage(),e);
