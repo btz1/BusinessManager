@@ -1,5 +1,6 @@
 package pk.temp.bm.controller;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +49,12 @@ public class EmployeeSalaryController {
     public JSONObject getCurrentPayableSalary(@RequestParam("empId") Long empId){
 //        Long empId = 1L;
         return employeeSalaryService.getCurrentSalary(empId);
+    }
+
+    @RequestMapping(value = "/getEmployeePayableSalaryList")
+    public JSONArray getEmployeePayableSalaryList(){
+//        Long empId = 1L;
+        return employeeSalaryService.getEmployeePayableSalaryList();
     }
 
 }

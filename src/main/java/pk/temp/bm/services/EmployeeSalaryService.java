@@ -42,6 +42,15 @@ public class EmployeeSalaryService {
         return employeeSalaryRepository.findByEmployee(employeeModel);
     }
 
+    public JSONArray getEmployeePayableSalaryList(){
+        List<EmployeeModel> allActiveEmployees = employeeService.getActiveEmployees();
+        JSONArray employeeSalaryList = new JSONArray();
+        for(EmployeeModel employeeModel : allActiveEmployees){
+            employeeSalaryList.add(getCurrentSalary(employeeModel.getId()));
+        }
+        return employeeSalaryList;
+    }
+
     public JSONObject getCurrentSalary(Long empId){
         EmployeeModel employeeModel;
         Double currentSalary;
