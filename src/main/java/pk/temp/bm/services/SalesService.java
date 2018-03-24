@@ -43,7 +43,7 @@ public class SalesService {
 
                 CustomerModel customerModel = new CustomerModel();
                 customerModel = sales.getCustomer();
-                if(null == customerModel){
+                if(null == customerModel.getId()){
                     customerModel = customerRepository.save(sales.getCustomer());
                 }
                 sales.setCustomer(customerModel);
