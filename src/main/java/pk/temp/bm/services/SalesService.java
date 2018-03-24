@@ -43,19 +43,15 @@ public class SalesService {
 
                 CustomerModel customerModel = new CustomerModel();
                 customerModel = sales.getCustomer();
-                if(null == customerModel.getId()){
+                if(null == customerModel){
                     customerModel = customerRepository.save(sales.getCustomer());
                 }
                 sales.setCustomer(customerModel);
 
                 if (sales.getSaleProductList() != null){
-                    List<SalesProductsModel> salesProductsList = new ArrayList<>();
-                    SalesProductsModel salesProductsModel = new SalesProductsModel();
-                    salesProductsModel = salesProductRepository.save(sales.getSaleProductList().get(0));
-                    salesProductsList.add(salesProductsModel);
-                    sales.setSaleProductList(salesProductsList);
-
+                    salesProductRepository.save(sales.getSaleProductList());
                 }
+                sales.setSaleDate(new Date());
                 salesRepository.save(sales);
 
                 // credit entry, in any case
@@ -63,6 +59,7 @@ public class SalesService {
                 ledgerModel.setCustomer(customerModel);
                 ledgerModel.setDate(new Date());
                 ledgerModel.setCreditAmount(sales.getTotalAmount());
+                ledgerModel.setDebitAmount(0D);
                 ledgerRepository.save(ledgerModel);
 
                 actionStatus = true;
@@ -81,6 +78,7 @@ public class SalesService {
                     ledgerModel.setCustomer(customerModel);
                     ledgerModel.setDate(new Date());
                     ledgerModel.setDebitAmount(sales.getAdvancePayment());
+                    ledgerModel.setCreditAmount(0D);
                     ledgerRepository.save(ledgerModel);
                 }
 

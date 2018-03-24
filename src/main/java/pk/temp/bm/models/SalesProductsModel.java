@@ -27,8 +27,9 @@ public class SalesProductsModel implements Serializable{
     @Column(nullable=false, length=100)
     private String quantity;
 
-    @OneToOne
-    private SalesModel saleModel;
+/*    @ManyToOne
+    @JoinColumn(name = "salesId")
+    private SalesModel saleModel;*/
 
     @OneToOne
     @JoinColumn(name="product_id")
@@ -45,6 +46,7 @@ public class SalesProductsModel implements Serializable{
         this.quantity = quantity;
     }
 
+/*
     public SalesModel getSaleModel() {
         return saleModel;
     }
@@ -52,6 +54,7 @@ public class SalesProductsModel implements Serializable{
     public void setSaleModel(SalesModel saleModel) {
         this.saleModel = saleModel;
     }
+*/
 
     public Long getId() {
         return id;

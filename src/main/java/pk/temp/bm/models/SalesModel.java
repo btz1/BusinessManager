@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -25,10 +26,10 @@ public class SalesModel implements Serializable{
     private Double totalAmount;
 
     @Column(name="sale_date", nullable = false)
-    private String saleDate;
+    private Date saleDate;
 
     @Column(name="deliver_date", nullable = false)
-    private String deliverDate;
+    private Date deliverDate;
 
     @Column(name="advance_payment", nullable=false, length=100)
     private Double advancePayment;
@@ -51,19 +52,19 @@ public class SalesModel implements Serializable{
         this.totalAmount = totalAmount;
     }
 
-    public String getSaleDate() {
+    public Date getSaleDate() {
         return saleDate;
     }
 
-    public void setSaleDate(String saleDate) {
+    public void setSaleDate(Date saleDate) {
         this.saleDate = saleDate;
     }
 
-    public String getDeliverDate() {
+    public Date getDeliverDate() {
         return deliverDate;
     }
 
-    public void setDeliverDate(String deliverDate) {
+    public void setDeliverDate(Date deliverDate) {
         this.deliverDate = deliverDate;
     }
 

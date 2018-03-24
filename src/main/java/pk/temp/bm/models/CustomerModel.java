@@ -42,7 +42,7 @@ public class CustomerModel implements Serializable {
     private String city;
 
     @OneToMany
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "customer_id")
     @JsonIgnore
     private List<LedgerModel> ledgerEntries;
 

@@ -23,7 +23,7 @@ public class SalesController {
     @Autowired
     private DeadlineFinder deadlineFinder;
 
-    @RequestMapping(value = "/salesData",method = RequestMethod.POST)
+    @RequestMapping(value = "/saveSalesData",method = RequestMethod.POST)
     public String saveSalesData(@RequestParam("jsonObject") String jsonObject){
         salesService.saveSalesData(jsonObject);
         return "";
