@@ -23,7 +23,6 @@ public class SalePaymentsModel implements Serializable{
     private Double amountPaid;
 
     @Column(name = "paid_on")
-    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date paidOn;
 
     @Column(name = "sale_payment_cleared")
@@ -31,6 +30,9 @@ public class SalePaymentsModel implements Serializable{
 
     @Column(name = "cash_payment")
     private Boolean cashPayment;
+
+    @OneToOne(mappedBy = "salePaymentsModel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private LedgerModel ledgerModel;
 
     public Long getId() {
         return id;
@@ -78,5 +80,13 @@ public class SalePaymentsModel implements Serializable{
 
     public void setCashPayment(Boolean cashPayment) {
         this.cashPayment = cashPayment;
+    }
+
+    public LedgerModel getLedgerModel() {
+        return ledgerModel;
+    }
+
+    public void setLedgerModel(LedgerModel ledgerModel) {
+        this.ledgerModel = ledgerModel;
     }
 }

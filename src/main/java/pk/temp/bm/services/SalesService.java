@@ -60,6 +60,7 @@ public class SalesService {
                 ledgerModel.setDate(new Date());
                 ledgerModel.setCreditAmount(sales.getTotalAmount());
                 ledgerModel.setDebitAmount(0D);
+                ledgerModel.setSalesModel(sales);
                 ledgerRepository.save(ledgerModel);
 
                 actionStatus = true;
@@ -79,6 +80,7 @@ public class SalesService {
                     ledgerModel.setDate(new Date());
                     ledgerModel.setDebitAmount(sales.getAdvancePayment());
                     ledgerModel.setCreditAmount(0D);
+                    ledgerModel.setSalePaymentsModel(salePaymentsModel);
                     ledgerRepository.save(ledgerModel);
                 }
 

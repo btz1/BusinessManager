@@ -33,12 +33,19 @@ public class LedgerModel implements Serializable{
     @Column(name="credit", nullable=false, length=100)
     private Double creditAmount;
 
-    @JsonFormat(pattern="dd-MMMM-yyyy")
     @Column(nullable = false)
     private Date date;
 
     @OneToOne
     private CustomerModel customer;
+
+    @OneToOne
+    @JoinColumn(name = "sale_id")
+    private SalesModel salesModel;
+
+    @OneToOne
+    @JoinColumn(name = "sale_payment_id")
+    private SalePaymentsModel salePaymentsModel;
 
 
     public Double getDebitAmount() {
@@ -79,5 +86,21 @@ public class LedgerModel implements Serializable{
 
     public void setCustomer(CustomerModel customer) {
         this.customer = customer;
+    }
+
+    public SalesModel getSalesModel() {
+        return salesModel;
+    }
+
+    public void setSalesModel(SalesModel salesModel) {
+        this.salesModel = salesModel;
+    }
+
+    public SalePaymentsModel getSalePaymentsModel() {
+        return salePaymentsModel;
+    }
+
+    public void setSalePaymentsModel(SalePaymentsModel salePaymentsModel) {
+        this.salePaymentsModel = salePaymentsModel;
     }
 }

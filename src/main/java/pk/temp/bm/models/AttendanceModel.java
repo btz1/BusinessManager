@@ -19,7 +19,6 @@ public class AttendanceModel {
     private EmployeeModel employee;
 
     @Column
-    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date date;
 
     @Column

@@ -19,7 +19,6 @@ public class TodoList {
     @Column(name = "message")
     private String todoMessage;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name="date", nullable = false)
     private Date messageDate;
 

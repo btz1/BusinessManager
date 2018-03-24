@@ -26,11 +26,9 @@ public class SalesModel implements Serializable{
     private Double totalAmount;
 
     @Column(name="sale_date", nullable = false)
-    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date saleDate;
 
     @Column(name="deliver_date", nullable = false)
-    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date deliverDate;
 
     @Column(name="advance_payment", nullable=false, length=100)
@@ -44,6 +42,9 @@ public class SalesModel implements Serializable{
     private List<SalesProductsModel> saleProductList;
 
     private Boolean delivered;
+
+    @OneToOne(mappedBy = "salesModel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private LedgerModel ledgerModel;
 
 
     public Double getTotalAmount() {
@@ -102,15 +103,19 @@ public class SalesModel implements Serializable{
         this.saleProductList = saleProductList;
     }
 
-    public String getCustomerName() {
-        return customer.getFirstName();
-    }
-
     public Boolean getDelivered() {
         return delivered;
     }
 
     public void setDelivered(Boolean delivered) {
         this.delivered = delivered;
+    }
+
+    public LedgerModel getLedgerModel() {
+        return ledgerModel;
+    }
+
+    public void setLedgerModel(LedgerModel ledgerModel) {
+        this.ledgerModel = ledgerModel;
     }
 }
