@@ -1,5 +1,7 @@
 package pk.temp.bm.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -29,6 +31,7 @@ public class EmployeeModel implements Serializable{
     private String address;
 
     @Column(name = "joining_date")
+    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date joinDate;
 
     @Column

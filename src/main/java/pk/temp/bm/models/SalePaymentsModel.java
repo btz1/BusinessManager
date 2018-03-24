@@ -1,5 +1,7 @@
 package pk.temp.bm.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +23,7 @@ public class SalePaymentsModel implements Serializable{
     private Double amountPaid;
 
     @Column(name = "paid_on")
+    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date paidOn;
 
     @Column(name = "sale_payment_cleared")

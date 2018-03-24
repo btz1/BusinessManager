@@ -33,7 +33,7 @@ public class LedgerModel implements Serializable{
     @Column(name="credit", nullable=false, length=100)
     private Double creditAmount;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="dd-MMMM-yyyy")
     @Column(nullable = false)
     private Date date;
 

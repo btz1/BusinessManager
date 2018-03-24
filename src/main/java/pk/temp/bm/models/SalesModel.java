@@ -26,9 +26,11 @@ public class SalesModel implements Serializable{
     private Double totalAmount;
 
     @Column(name="sale_date", nullable = false)
+    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date saleDate;
 
     @Column(name="deliver_date", nullable = false)
+    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date deliverDate;
 
     @Column(name="advance_payment", nullable=false, length=100)

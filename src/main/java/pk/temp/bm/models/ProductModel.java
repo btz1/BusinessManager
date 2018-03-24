@@ -1,5 +1,7 @@
 package pk.temp.bm.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,9 +53,11 @@ public class ProductModel implements Serializable {
     private boolean enabled;
 
     @Column(name="created_on")
+    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date createdDate;
 
     @Column(name="updated_on")
+    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date updatedOn;
 
     @Column(name = "unit")
