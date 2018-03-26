@@ -24,6 +24,7 @@ public class SalesController {
     public String saveSalesData(@RequestParam("jsonObject") String jsonObject){
         salesService.saveSalesData(jsonObject);
         return "";
+
     }
 
     @RequestMapping(value = "/Invoice", method = RequestMethod.GET)
