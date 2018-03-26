@@ -2,10 +2,7 @@ package pk.temp.bm.controller;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pk.temp.bm.models.CustomerModel;
 import pk.temp.bm.models.SalesModel;
 import pk.temp.bm.services.SalesService;
@@ -36,7 +33,9 @@ public class SalesController {
     }
 
     @RequestMapping(value = "/getAllSales", method = RequestMethod.GET)
+    @ResponseBody
     public List<SalesModel> getAllSales(){
+
         return salesService.getAllSalesForPortal();
     }
 

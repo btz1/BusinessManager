@@ -37,7 +37,7 @@ public class SalesModel implements Serializable{
     @OneToOne(fetch = FetchType.LAZY)
     private CustomerModel customer;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "sale_id")
     private List<SalesProductsModel> saleProductList;
 

@@ -14,6 +14,6 @@ public interface EmployeeSalaryRepository extends CrudRepository<EmployeeSalaryM
 
     List<EmployeeSalaryModel> findByEmployee(EmployeeModel employeeModel);
 
-    List<EmployeeSalaryModel> findByDateBetween(@Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List<EmployeeSalaryModel> findByDateBetweenAndEmployee(@Param("startDate") Date startDate, @Param("endDate") Date endDate, @Param("employee") EmployeeModel employeeModel);
 
 }

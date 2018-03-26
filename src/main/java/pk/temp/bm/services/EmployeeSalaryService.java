@@ -62,7 +62,9 @@ public class EmployeeSalaryService {
         monthEnd = BMDateUtils.getDateForEndOfDay(monthEnd);
 
         double alreadyPaidThisMonth = 0;
-        List<EmployeeSalaryModel> salaryHistoryOfMonth = employeeSalaryRepository.findByDateBetween(monthStart,monthEnd);
+        employeeModel = new EmployeeModel();
+        employeeModel.setId(empId);
+        List<EmployeeSalaryModel> salaryHistoryOfMonth = employeeSalaryRepository.findByDateBetweenAndEmployee(monthStart,monthEnd,employeeModel);
         if(salaryHistoryOfMonth.isEmpty()){
             employeeModel = employeeService.findById(empId);
         } else {

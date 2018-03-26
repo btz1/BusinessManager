@@ -28,7 +28,6 @@ public class SalesProductsModel implements Serializable{
     private String quantity;
 
 /*    @ManyToOne
-    @JoinColumn(name = "salesId")
     private SalesModel saleModel;*/
 
     @OneToOne
@@ -46,15 +45,13 @@ public class SalesProductsModel implements Serializable{
         this.quantity = quantity;
     }
 
-/*
-    public SalesModel getSaleModel() {
+/*    public SalesModel getSaleModel() {
         return saleModel;
     }
 
     public void setSaleModel(SalesModel saleModel) {
         this.saleModel = saleModel;
-    }
-*/
+    }*/
 
     public Long getId() {
         return id;
