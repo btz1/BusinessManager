@@ -15,8 +15,6 @@ import java.util.List;
 @RestController
 public class SalesController {
 
-    // https://github.com/btz1/BusinessManager.git
-
     @Autowired
     private SalesService salesService;
     @Autowired
