@@ -31,12 +31,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- spring state machine -->
-		<dependency>
-			<groupId>org.springframework.statemachine</groupId>
-			<artifactId>spring-statemachine-core</artifactId>
-			<version>1.2.6.RELEASE</version>
-		</dependency>
 		<!-- spring data jpa -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -66,22 +60,6 @@
 			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
 
-		<!-- Google Libraries for analytics + json -->
-		<dependency>
-			<groupId>com.google.gdata</groupId>
-			<artifactId>core</artifactId>
-			<version>1.47.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.google.apis</groupId>
-			<artifactId>google-api-services-analytics</artifactId>
-			<version>v3-rev142-1.23.0</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.google.api-client</groupId>
-		    <artifactId>google-api-client-gson</artifactId>
-		    <version>1.23.0</version>
-		</dependency>	
 		<!-- <dependency> <groupId>com.google.http-client</groupId> <artifactId>google-http-client-jackson</artifactId> 
 			<version>1.18.0-rc</version> </dependency> -->
 		<dependency>
@@ -92,13 +70,6 @@
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
-		</dependency>
-
-		<!-- Template engine -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>1.7</version>
 		</dependency>
 
 		<dependency>
@@ -124,18 +95,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-pool2</artifactId>
 		</dependency>
-
-		<dependency>
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant</artifactId>
-			<version>1.9.4</version>
-		</dependency>
-		<!-- Mailing lib -->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>mail</artifactId>
-			<version>1.4.7</version>
-		</dependency>
 		<!-- json mapper lib -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -158,18 +117,8 @@
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
 		</dependency>
-		<!-- Bar code lib -->
-		<dependency>
-			<groupId>net.sourceforge.barbecue</groupId>
-			<artifactId>barbecue</artifactId>
-			<version>1.5-beta1</version>
-		</dependency>
 
 		<!-- Eh Cache -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-ehcache</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk</artifactId>
@@ -187,13 +136,6 @@
 			<artifactId>commons-collections4</artifactId>
 			<version>4.1</version>
 		</dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
-            <version>6.2.2.jre8</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.scream3r/jssc -->
         <dependency>
