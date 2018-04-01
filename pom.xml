@@ -212,7 +212,7 @@
                 <artifactId>heroku-maven-plugin</artifactId>
                 <version>1.1.1</version>
                 <configuration>
-                    <appName>fahadfoundary</appName>
+                    <appName>businessmanager-btz</appName>
                     <includeTarget>false</includeTarget>
                     <includes>
                         <include>${basedir}/${full-artifact-name}</include>
@@ -221,6 +221,19 @@
                     <processTypes>
                         <web>java $JAVA_OPTS -jar ${full-artifact-name}</web>
                     </processTypes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>pk.temp.bm.BMApplication</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
