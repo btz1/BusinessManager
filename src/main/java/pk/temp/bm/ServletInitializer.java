@@ -41,17 +41,6 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-
-		/*
-		* Following block try to find a new EndPoint,
-		* create its permission, and assign that
-		* permission to OEAdmin Role, with roleId=GlobalConstants.OE_ADMIN_DB_ID.
-		* -- Abubakar Iqbal
-		* */
-		ApplicationContext applicationContext = ((ContextRefreshedEvent) event).getApplicationContext();
-		applicationContext.getBean(RequestMappingHandlerMapping.class).getHandlerMethods();
-		RequestMappingHandlerMapping requestMappingHandlerMapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
-		createPermissionIfRequired(requestMappingHandlerMapping);
 	}
 	
 	@PostConstruct
@@ -61,52 +50,6 @@ public class ServletInitializer extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(BMApplication.class);
-	}
-
-	private void createPermissionIfRequired(RequestMappingHandlerMapping requestMappingHandlerMapping	){
-		List<String> endPointList = new ArrayList<>();
-		for(Map.Entry<?,?> entry : requestMappingHandlerMapping.getHandlerMethods().entrySet()){
-			RequestMappingInfo requestMappingInfo = (RequestMappingInfo) entry.getKey();
-			String endPointPattern = requestMappingInfo.getPatternsCondition().toString();
-			String endPoint = endPointPattern.replaceAll("\\[","")
-					.replaceAll("\\]","").replaceAll("\\{.*?\\}", "")
-					.replaceAll("/+","/").replaceAll(" ","");
-			if(endPoint.contains("||")){
-				String[] array = endPoint.split("\\|\\|");
-				for(String element : array){
-					endPointList.add(element);
-				}
-			}
-			else{
-				endPointList.add(endPoint);
-			}
-		}
-		List<String> existingEndPoints = permissionService.getPermissionsByURL(endPointList);
-		List<Permission> newPermissions = new ArrayList<>();
-		for(String endPoint : endPointList){
-			if(!existingEndPoints.contains(endPoint)){
-				String camelEndPointName = endPoint.replaceAll("\\/"," ");
-				String simpleEndPointName = GlobalAppUtil.decodeCamelCase(camelEndPointName);
-				Permission permission = new Permission();
-				permission.setPermission(simpleEndPointName);
-				permission.setPermissionURL(endPoint);
-				newPermissions.add(permission);
-			}
-		}
-
-		if(!newPermissions.isEmpty()){
-			logger.info("New Permissions Found...");
-			newPermissions = permissionService.saveAllPermissios(newPermissions);
-			List<RolesPermission> rolesPermissionList = new ArrayList<>();
-			for(Permission permission : newPermissions){
-				logger.info("Added "+permission.getPermissionURL() + " To Admin Role");
-				RolesPermission rolesPermission = new RolesPermission();
-				rolesPermission.setPermissionId(permission.getId());
-				rolesPermission.setRoleId(GlobalConstants.OE_ADMIN_DB_ID);
-				rolesPermissionList.add(rolesPermission);
-			}
-			permissionService.saveAllRolePermissions(rolesPermissionList);
-		}
 	}
 
 }
