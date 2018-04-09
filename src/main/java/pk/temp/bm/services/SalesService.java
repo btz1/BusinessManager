@@ -2,6 +2,7 @@ package pk.temp.bm.services;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +28,11 @@ public class SalesService {
     @Autowired
     private SalesProductRepository salesProductRepository;
     @Autowired
-
     private SalePaymentsRepository salePaymentsRepository;
     @Autowired
     private LedgerRepository ledgerRepository;
+    @Autowired
+    private ExpenseRepository expenseRepository;
 
     public Boolean saveSalesData(String jsonObject){
         Boolean actionStatus = false;
@@ -117,6 +119,36 @@ public class SalesService {
         jsonObject.put("deliverableCount",deliverableCount);
         jsonObject.put("returnedCount",deliveredCount);
         return jsonObject;
+    }
+
+    public JSONArray getCashFlowByDate(Date startDate, Date endDate){
+        List<ExpenseModel> expenseList = expenseRepository.findAllByDateBetween(startDate,endDate);
+        List<SalePaymentsModel> salePaymentsList = salePaymentsRepository.findAllByPaidOnBetween(startDate,endDate);
+
+        JSONArray jsonArray = new JSONArray();
+        for(SalePaymentsModel model : salePaymentsList){
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("date",model.getPaidOn());
+            jsonObject.put("amount",model.getAmountPaid());
+            jsonObject.put("saleId",model.getSale().getSalesId());
+            jsonObject.put("type","Sale Payment");
+            jsonObject.put("comments","Payment Received.");
+            jsonArray.add(jsonObject);
+        }
+        for(ExpenseModel model : expenseList){
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("date",model.getDate());
+            jsonObject.put("amount",model.getAmount());
+            jsonObject.put("saleId",model.getSaleId());
+            jsonObject.put("type","Expense");
+            jsonObject.put("comments",model.getComment());
+            jsonArray.add(jsonObject);
+        }
+        return jsonArray;
+    }
+
+    public void addExpense(ExpenseModel expenseModel){
+        expenseRepository.save(expenseModel);
     }
 
 

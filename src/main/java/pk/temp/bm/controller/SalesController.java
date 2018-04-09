@@ -1,5 +1,6 @@
 package pk.temp.bm.controller;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -51,5 +52,14 @@ public class SalesController {
     public JSONObject getDashBoardStats(){
         return salesService.getDashBoardStats();
     }
+
+    @RequestMapping(value = "/getCashFlowByDate")
+    public JSONArray getCashFlowByDate(@RequestParam("startDate") String stringStartDate, @RequestParam("endDate") String stringEndDate){
+        Date startDate = BMDateUtils.parseAnyStringToDate(stringStartDate);
+        Date endDate = BMDateUtils.parseAnyStringToDate(stringEndDate);
+        return salesService.getCashFlowByDate(startDate,endDate);
+    }
+
+
 
 }
