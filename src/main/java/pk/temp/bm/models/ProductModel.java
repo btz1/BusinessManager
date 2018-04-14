@@ -53,11 +53,9 @@ public class ProductModel implements Serializable {
     private boolean enabled;
 
     @Column(name="created_on")
-    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date createdDate;
 
     @Column(name="updated_on")
-    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date updatedOn;
 
     @Column(name = "unit")

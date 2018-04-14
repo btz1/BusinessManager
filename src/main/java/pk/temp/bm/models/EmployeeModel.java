@@ -31,7 +31,6 @@ public class EmployeeModel implements Serializable{
     private String address;
 
     @Column(name = "joining_date")
-    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date joinDate;
 
     @Column

@@ -26,11 +26,11 @@ public class CoreDbConnection {
 
     public static Connection getBmDbConnection() throws Exception{
         Environment environment = ApplicationContextHolder.getContext().getEnvironment();
-        String server = environment.getProperty("talend.host_db");
-        String port = environment.getProperty("talend.port_db");
-        String userName = environment.getProperty("talend.user_db");
-        String password = environment.getProperty("talend.password_db");
-        String dbName = environment.getProperty("talend.name_db");
+        String server = environment.getProperty("host_db");
+        String port = environment.getProperty("port_db");
+        String userName = environment.getProperty("user_db");
+        String password = environment.getProperty("password_db");
+        String dbName = environment.getProperty("name_db");
 
         return createMysqlConnection(server,port,dbName,userName,password);
     }

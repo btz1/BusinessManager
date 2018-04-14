@@ -22,7 +22,6 @@ public class EmployeeSalaryModel {
     private Double paidAmount;
 
     @Column
-    @JsonFormat(pattern="dd-MMMM-yyyy")
     private Date date;
 
     public Long getId() {

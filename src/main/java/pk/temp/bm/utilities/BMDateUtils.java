@@ -37,7 +37,7 @@ public class BMDateUtils {
 
 	public static Integer getCurrentMonth(){
 	    Calendar calendar = Calendar.getInstance();
-	    return calendar.get(Calendar.MONTH + 1);
+	    return calendar.get(Calendar.MONTH) + 1;
     }
 	
 	public static Date changeTimeStampToDateOnly(Date date){

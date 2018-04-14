@@ -1,11 +1,9 @@
 package pk.temp.bm.controller;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pk.temp.bm.models.CustomerModel;
 import pk.temp.bm.models.SalesModel;
 import pk.temp.bm.services.SalesService;
@@ -27,6 +25,7 @@ public class SalesController {
     public String saveSalesData(@RequestParam("jsonObject") String jsonObject){
         salesService.saveSalesData(jsonObject);
         return "";
+
     }
 
     @RequestMapping(value = "/Invoice", method = RequestMethod.GET)
@@ -36,7 +35,9 @@ public class SalesController {
     }
 
     @RequestMapping(value = "/getAllSales", method = RequestMethod.GET)
+    @ResponseBody
     public List<SalesModel> getAllSales(){
+
         return salesService.getAllSalesForPortal();
     }
 
@@ -51,5 +52,14 @@ public class SalesController {
     public JSONObject getDashBoardStats(){
         return salesService.getDashBoardStats();
     }
+
+    @RequestMapping(value = "/getCashFlowByDate")
+    public JSONArray getCashFlowByDate(@RequestParam("startDate") String stringStartDate, @RequestParam("endDate") String stringEndDate){
+        Date startDate = BMDateUtils.parseAnyStringToDate(stringStartDate);
+        Date endDate = BMDateUtils.parseAnyStringToDate(stringEndDate);
+        return salesService.getCashFlowByDate(startDate,endDate);
+    }
+
+
 
 }

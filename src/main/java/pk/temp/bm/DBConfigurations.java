@@ -44,8 +44,8 @@ public class DBConfigurations {
 
 		hikariConfig.setDriverClassName(env.getRequiredProperty("spring.datasource.driverClassName"));
 		hikariConfig.setJdbcUrl( env.getRequiredProperty("spring.datasource.url") );
-		hikariConfig.setUsername(env.getRequiredProperty("talend.user_db"));
-		hikariConfig.setPassword(env.getRequiredProperty("talend.password_db"));
+		hikariConfig.setUsername(env.getRequiredProperty("user_db"));
+		hikariConfig.setPassword(env.getRequiredProperty("password_db"));
 		hikariConfig.setConnectionInitSql("SELECT 1");
 		hikariConfig.setMaximumPoolSize(50);
 		hikariConfig.setAutoCommit(true);
