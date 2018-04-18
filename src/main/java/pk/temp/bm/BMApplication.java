@@ -44,77 +44,10 @@ public class BMApplication implements AsyncConfigurer {
 		return executor;
 	}
 
-	@Bean(name = "dataDumpTaskExecutor")
-	public Executor getDataDumpTaskExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(10);
-		executor.setThreadNamePrefix("DataDumpTask-");
-		executor.initialize();
-		return executor;
-	}
-
-
-	@Bean(name = "staticTaskExecutor")
-	public Executor getStaticTaskExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(15);
-		executor.setThreadNamePrefix("StaticTask-");
-		executor.initialize();
-		return executor;
-	}
-
-
-	@Bean(name = "compFutureTaskExecutor")
-	public Executor getCompFutureTaskExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(10);
-		executor.setThreadNamePrefix("CompFuture-");
-		executor.initialize();
-		return executor;
-	}
-
-
-	@Bean(name = "agentTaskExecutor")
-	public Executor getAgentTaskExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(1);
-		executor.setThreadNamePrefix("AgentPing-");
-		executor.initialize();
-		return executor;
-	}
-
-	@Bean(name = "IOTaskExecutor")
-	public Executor getIOTaskExecutor() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(10);
-		executor.setThreadNamePrefix("customIO-");
-		executor.initialize();
-		return executor;
-	}
-
-	@Bean(name = "stateMachineInit")
-	public Executor getStateMachineInitPool() {
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(100);
-		executor.setThreadNamePrefix("SMInitPool-");
-		executor.initialize();
-		return executor;
-	}
 
 	@Override
 	public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
 		return new AsyncCustomExceptionHandler();
-	}
-
-	@Bean(name = "applicationEventMulticaster")
-	public ApplicationEventMulticaster simpleApplicationEventMulticaster() {
-		SimpleApplicationEventMulticaster eventMulticaster= new SimpleApplicationEventMulticaster();
-		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setCorePoolSize(20);
-		executor.setThreadNamePrefix("OEEventListeners-");
-		executor.initialize();
-		eventMulticaster.setTaskExecutor(executor);
-		return eventMulticaster;
 	}
 
 

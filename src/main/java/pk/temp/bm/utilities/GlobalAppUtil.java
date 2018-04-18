@@ -18,49 +18,7 @@ import pk.temp.bm.models.User;
 public class GlobalAppUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalAppUtil.class);
-
-
     private volatile static Map<String, Object> dataMap = new HashMap<>();
-
-
-    public static void setLoggedInUser(User user){
-        dataMap.put(GlobalConstants.LOGGED_IN_USER_KEY,user);
-    }
-    public static User getLoggedInUser(){
-        return (User) dataMap.get(GlobalConstants.LOGGED_IN_USER_KEY);
-    }
-
-    public static void setLoggedInUserClient(String clientId){
-        dataMap.put(GlobalConstants.LOGGED_IN_USER_CLIENT_KEY,clientId);
-    }
-    public static String getLoggedInUserClient(){
-        return (String) dataMap.get(GlobalConstants.LOGGED_IN_USER_CLIENT_KEY);
-    }
-
-    public static String getActiveEnvironment(){
-        return (String) dataMap.get(GlobalConstants.SERVER_ENVIRONMENT_PROPERTY);
-    }
-
-    public static void setActiveEnvironment(String activeEnvironment){
-        dataMap.put(GlobalConstants.SERVER_ENVIRONMENT_PROPERTY,activeEnvironment);
-    }
-
-
-    public static Executor getCompFuturePool() {
-        return (Executor) ApplicationContextHolder.getContext().getBean("compFutureTaskExecutor");
-    }
-
-    public static Executor getAgentTaskExecutor() {
-        return (Executor) ApplicationContextHolder.getContext().getBean("agentTaskExecutor");
-    }
-
-    public static Executor getIOPool() {
-        return (Executor) ApplicationContextHolder.getContext().getBean("IOTaskExecutor");
-    }
-
-    public static Executor getStateMachineInitPool() {
-        return (Executor) ApplicationContextHolder.getContext().getBean("stateMachineInit");
-    }
 
     public static String decodeCamelCase(String s) {
         return s.replaceAll(

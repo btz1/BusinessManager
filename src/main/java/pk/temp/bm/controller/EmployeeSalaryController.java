@@ -26,11 +26,10 @@ public class EmployeeSalaryController {
 
 
     @RequestMapping(value = "/paySalary")
-    public ResponseEntity<?> paySalary(@RequestParam("employeeId") Long employeeId, @RequestParam("amount") Double amountPaid,
-                                       @RequestParam("date") Date date){
+    public ResponseEntity<?> paySalary(@RequestParam("paySalaryList") String paySalaryList){
         Boolean recordUpdated = false;
         try{
-            employeeSalaryService.paySalary(employeeId,amountPaid,date);
+            employeeSalaryService.paySalary(paySalaryList);
             recordUpdated = true;
         }
         catch (Exception e){

@@ -1,5 +1,6 @@
 package pk.temp.bm.services;
 
+import jdk.nashorn.internal.parser.JSONParser;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,11 @@ public class EmployeeSalaryService {
     @Autowired
     private EmployeeService employeeService;
 
-    public void paySalary(Long employeeId, Double amountPaid, Date paidOn){
+    public void paySalary(String salaryList){
+        JSONObject jsonObject = new JSONObject();
         EmployeeSalaryModel employeeSalaryModel = new EmployeeSalaryModel();
         EmployeeModel employeeModel = new EmployeeModel();
-        employeeModel.setId(employeeId);
+        employeeModel.setId(salaryList.empId);
 
         employeeSalaryModel.setEmployee(employeeModel);
         employeeSalaryModel.setPaidAmount(amountPaid);

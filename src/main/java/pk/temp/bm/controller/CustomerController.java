@@ -16,6 +16,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+
     @RequestMapping(value = "/getAllCustomersSummary", method = RequestMethod.GET)
     public List<CustomerModel> getAllCustomersSummary(){
         return customerService.getAllCustomersSummary();
