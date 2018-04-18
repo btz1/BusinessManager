@@ -26,7 +26,7 @@ public class EmployeeSalaryService {
     private EmployeeService employeeService;
 
     public void paySalary(String salaryList){
-        JSONObject jsonObject = new JSONObject();
+        /*JSONObject jsonObject = new JSONObject();
         EmployeeSalaryModel employeeSalaryModel = new EmployeeSalaryModel();
         EmployeeModel employeeModel = new EmployeeModel();
         employeeModel.setId(salaryList.empId);
@@ -35,7 +35,7 @@ public class EmployeeSalaryService {
         employeeSalaryModel.setPaidAmount(amountPaid);
         employeeSalaryModel.setDate(paidOn);
 
-        employeeSalaryRepository.save(employeeSalaryModel);
+        employeeSalaryRepository.save(employeeSalaryModel);*/
     }
 
     public List<EmployeeSalaryModel> getEmployeeSalaryHistory(Long empId){

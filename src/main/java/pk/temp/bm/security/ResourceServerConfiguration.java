@@ -35,7 +35,7 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
 			.antMatchers("/salesData").permitAll()
 			.antMatchers("/agent/**").permitAll()
 			.antMatchers("/inventory/updateInventory").permitAll()
-			.antMatchers(HttpMethod.OPTIONS, "**").authenticated()
+			.antMatchers(HttpMethod.OPTIONS, "**").permitAll()
 			.antMatchers(HttpMethod.DELETE, "**").denyAll()
 			.antMatchers(HttpMethod.PUT, "**").denyAll()
 			.antMatchers(HttpMethod.PATCH, "**").denyAll()
